@@ -1,0 +1,77 @@
+{
+    "[python]": {
+        "editor.rulers": [
+            {
+                "column": 79,
+                "color": "#eeff0070"
+            },
+            {
+                "column": 119,
+                "color": "#00ff0067"
+            }
+        ],
+        "editor.formatOnType": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "ms-python.black-formatter",
+    },
+    "python.analysis.inlayHints.functionReturnTypes": true,
+    "python.analysis.inlayHints.variableTypes": true,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingTypeStubs": "information",
+        "reportUnknownMemberType": "information"
+    },
+    // Editor
+    // "editor.defaultFormatter": null,
+    "files.exclude": {
+        "**/env": true,
+        "**/__pycache__/": true,
+    },
+    "search.exclude": {
+        "**/__pycache__/": true,
+        "**/env": true,
+        "**/locale": true,
+    },
+    // Terminal
+    "terminal.integrated.sendKeybindingsToShell": true,
+    // cSpell
+    "cSpell.diagnosticLevel": "Information",
+    "cSpell.customDictionaries": {
+        "readme": {
+            "name": "readme",
+            "path": "${workspaceRoot}/.vscode/cspell-readme.txt",
+            "description": "Words used at markdown files",
+            "addWords": true,
+            "scope":"workspace",
+            "noSuggest": true,
+        },
+        "python": {
+            "name": "python",
+            "path": "${workspaceRoot}/.vscode/cspell-python.txt",
+            "description": "Words used at python files",
+            "addWords": true,
+            "scope":"workspace",
+            "noSuggest": true,
+        },
+        "project-vars": {
+            "name": "project-vars",
+            "path": "${workspaceRoot}/.vscode/cspell-project-vars.txt",
+            "description": "Words used at project-vars files",
+            "addWords": true,
+            "scope":"workspace",
+            "noSuggest": true,
+          },
+    },
+    "cSpell.dictionaries": [
+        // To disable a custom dict set !name, by default are enabled
+        // "!readme"
+    ],
+    // WSL case
+    "remote.extensionKind": {
+        "quicktype.quicktype": [ "ui" ],
+        "ms-azuretools.vscode-docker": [ "workspace" ],
+        "mongodb.mongodb-vscode": ["ui"],
+    },
+    "files.eol": "\r\n",
+    "isort.check": true,
+}

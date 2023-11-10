@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "project_example"
+version = "0.1.0"
+description = ""
+authors = ["Author Name <example@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+mongoengine = "^0.27.0"
+djangorestframework = "^3.14.0"
+django = "~4.2.7"
+python-dotenv = "^1.0.0"
+
+[tool.black]
+line-length = 119
+
+[tool.isort]
+force_grid_wrap = 2
+multi_line_output = 3
+include_trailing_comma = true
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
