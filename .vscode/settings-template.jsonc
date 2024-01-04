@@ -13,27 +13,61 @@
         "editor.formatOnType": true,
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "ms-python.black-formatter",
+        
     },
+    "autoDocstring.docstringFormat": "sphinx",
+    "python.languageServer": "Pylance",
     "python.analysis.inlayHints.functionReturnTypes": true,
     "python.analysis.inlayHints.variableTypes": true,
-    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.stubPath": "project_example/typings",
+    "python.analysis.typeCheckingMode": "strict",
     "python.analysis.diagnosticSeverityOverrides": {
         "reportMissingTypeStubs": "information",
         "reportUnknownMemberType": "information"
     },
+    "isort.check": true,
+    // Allow python with virtual env on powershell
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+          "source": "PowerShell",
+          "icon": "terminal-powershell",
+          "args": ["-ExecutionPolicy", "Bypass"]
+        }
+      },
+      "terminal.integrated.defaultProfile.windows": "PowerShell",
     // Editor
-    // "editor.defaultFormatter": null,
+    "editor.defaultFormatter": null,
     "files.exclude": {
-        "**/env": true,
+        "**/.venv": true,
         "**/__pycache__/": true,
     },
     "search.exclude": {
         "**/__pycache__/": true,
-        "**/env": true,
+        "**/.venv": true,
         "**/locale": true,
     },
+    "files.eol": "\r\n",
+    "files.associations": {
+        "*.env*": "dotenv",
+    },
+    "editor.scrollbar.vertical": "auto",
+    "editor.overviewRulerBorder": true,
+    "editor.minimap.enabled": false,
+    "editor.glyphMargin": false, // Debug
+    "editor.guides.bracketPairs": true,
+    "editor.guides.bracketPairsHorizontal": "active",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.statusBar.visible": true,
+    "workbench.editor.pinnedTabsOnSeparateRow": true,
+    "workbench.activityBar.location": "top",
+    "workbench.activityBar.iconClickBehavior": "focus",
+    "breadcrumbs.filePath": "on",
+    "breadcrumbs.symbolSortOrder": "type",
+    "material-icon-theme.languages.associations": {
+        "dotenv": "tune",
+    },
     // Terminal
-    "terminal.integrated.sendKeybindingsToShell": true,
+    "terminal.integrated.sendKeybindingsToShell": false,
     // cSpell
     "cSpell.diagnosticLevel": "Information",
     "cSpell.customDictionaries": {
@@ -61,6 +95,14 @@
             "scope":"workspace",
             "noSuggest": true,
           },
+          "project-accents": {
+            "name": "project-accents",
+            "path": "${workspaceRoot}/.vscode/cspell-project-accents.txt",
+            "description": "Words used for skip spanish accents",
+            "addWords": true,
+            "scope":"workspace",
+            "noSuggest": true,
+          },
     },
     "cSpell.dictionaries": [
         // To disable a custom dict set !name, by default are enabled
@@ -72,6 +114,7 @@
         "ms-azuretools.vscode-docker": [ "workspace" ],
         "mongodb.mongodb-vscode": ["ui"],
     },
-    "files.eol": "\r\n",
-    "isort.check": true,
+    "remote.autoForwardPorts": false,
+    "cSpell.language": "en,es-ES",
+    "gitlab.aiAssistedCodeSuggestions.enabled": false
 }
