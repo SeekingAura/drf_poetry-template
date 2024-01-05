@@ -161,6 +161,19 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Docker local volumes
+postgres/
+
+# SQL inits
+*init.sql
+
+# temp disk outputs
+output/
+temp/
+
+# Logs
+logs/
+
 # IDE - VSCode
 .vscode/*
 !.vscode/*-template.json
