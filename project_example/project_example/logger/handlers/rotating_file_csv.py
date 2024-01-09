@@ -22,37 +22,39 @@ class RotatingFileCSV(RotatingFileHandler):
         backupCount: int = 0,
         encoding: Optional[str] = None,
         delay: bool = False,
-        errors=None,
+        errors: Optional[str] = None,
         csv_vars: tuple[str, ...] = tuple(),
         sep: str = ",",
         *args: list[Any],
         **kwargs: dict[str, Any],
     ):
         """
-        Constructor
+        Constructor method
 
         :param filename: File where logger will emit
         :type filename: Path
-        :param mode: read file mode, always must be append mode, rollover\
-        create file if this does not exist, defaults to "a"
+        :param mode: mode that the file will opened at emit, append mode is
+        required for log rotating files, defaults to "a"
         :type mode: str, optional
         :param maxBytes: max bytes that the file will have before to rotation\
-        or rollover, defaults to 0
+        or rollover, value 0 rollover never occurs, defaults to 0
         :type maxBytes: int, optional
-        :param backupCount: max of rotation files to persist, defaults to 0
+        :param backupCount: max of rotation files to persist, value 0 rollover\
+        never occurs, defaults to 0
         :type backupCount: int, optional
         :param encoding: encoding of rotation file, defaults to None
         :type encoding: Optional[str], optional
         :param delay: perform a delay to emit process, defaults to False
         :type delay: bool, optional
         :param errors: _description_, defaults to None
-        :type errors: _type_, optional
+        :type errors: Optional[str], optional
         :param csv_vars: tuple of csv vars that will used how headers of\
-        every rotated file, order is important at logger moment, defaults to\
-        tuple()
+        every rotated file, the same order must be follow when log is emitted,\
+        defaults to tuple()
         :type csv_vars: tuple[str, ...], optional
-        :param sep: expected separator on csv file, must be same of all
-        logger emits, defaults to ","
+        :param sep: char separator on csv file, this value is used at join\
+        process of :param:`csv_vars`, this char must be same on all log emits,\
+        defaults to ","
         :type sep: str, optional
         """
         super().__init__(
@@ -75,6 +77,6 @@ class RotatingFileCSV(RotatingFileHandler):
         At every rollover write csv header separated with separator then emit
         """
         super().doRollover()
-        if self.mode == "w" or self.stream is None:
+        if self.mode == "w" or self.stream is None:  # type: ignore[UnnecessaryComparison]
             self.stream = self._open()
         self.stream.write(self.csv_header)
