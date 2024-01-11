@@ -21,6 +21,13 @@ supervisor = "^4.2.5"
 dj-database-url = "^2.1.0"
 psycopg2 = "^2.9.9"
 
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.2.6"
+myst-parser = "^2.0.0"
+
 [tool.black]
 line-length = 119
 
