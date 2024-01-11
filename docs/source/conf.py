@@ -38,6 +38,13 @@ extensions = [
     "sphinx.ext.intersphinx",
 ]
 
+add_module_names = False
+"""
+Set short name of modules and classes
+"""
+
+autodoc_typehints = "both"
+
 autosummary_generate = True
 
 intersphinx_mapping = {
@@ -54,3 +61,6 @@ language = "en"
 
 html_theme = "alabaster"
 html_static_path = ["_static"]
+html_css_files = [
+    "func_params.css",
+]

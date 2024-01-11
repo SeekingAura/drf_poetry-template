@@ -1,0 +1,10 @@
+/* Show params one per line */
+dl.function > dt > em:before,
+dl.function > dt > span.sig-paren:before,
+dl.method > dt > em:before,
+dl.method > dt > span.sig-paren:before,
+dl.class > dt > span.sig-paren:before,
+dl.class > dt > em:before {
+  content: '\A';
+  display: block;
+}
