@@ -2,6 +2,7 @@
 
 .. automodule:: {{ fullname }}
    :members:
+   :member-order:
 
    {% block attributes %}
    {% if attributes %}
