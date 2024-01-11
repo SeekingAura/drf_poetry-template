@@ -11,7 +11,16 @@ contain the root `toctree` directive.
 :caption: Contents
 ```
 
+```{eval-rst}
+.. autosummary::
+    :toctree: project_example
+    :recursive:
+
+    project_example
+```
+
 # Indices and tables
 * {ref}`genindex`
 * {ref}`modindex`
 * {ref}`search`
+
