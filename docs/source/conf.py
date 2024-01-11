@@ -11,8 +11,15 @@
 #
 import os
 import sys
+import django
 
 sys.path.insert(0, os.path.abspath("../../project_example"))
+
+# Set default settings for django proyect
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_example.settings.settings")
+
+# Initialize django conf
+django.setup()
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -27,7 +34,15 @@ author = "Author Name"
 extensions = [
     "myst_parser",
     "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.intersphinx",
 ]
+
+autosummary_generate = True
+
+intersphinx_mapping = {
+    "python310": ("https://docs.python.org/3.10", None),
+}
 
 templates_path = ["_templates"]
 exclude_patterns = []
