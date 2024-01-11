@@ -6,7 +6,7 @@ from typing import Optional
 class FilterLogLevelSep(logging.Filter):
     """
     Limit log output to log levels located at
-    :attr:`FilterLogLevelSep._filter_levels`
+    :attr:`~_filter_levels`
 
     :param _filter_levels: levels name in full caps that are allowed to emit\
     log
