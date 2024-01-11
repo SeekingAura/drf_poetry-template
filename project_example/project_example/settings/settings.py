@@ -1,3 +1,4 @@
+# type: ignore[reportUnusedImport]
 """
 Django settings for project_example project.
 
@@ -10,7 +11,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import ast
-import logging
 import os
 from pathlib import Path
 
@@ -128,9 +128,9 @@ LOGGING = {
             "propagate": False,
         },
         # External files
-        "report_csv.sales_point-hour": {
+        "report_csv.example": {
             "handlers": [
-                "file.report_csv.sales_point-hour",
+                "file.report_csv.example",
             ],
             "level": LOG_LEVEL_CSV_LOG_FILES,
             "propagate": False,
