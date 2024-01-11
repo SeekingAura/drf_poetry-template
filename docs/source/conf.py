@@ -15,7 +15,7 @@ import django
 
 sys.path.insert(0, os.path.abspath("../../project_example"))
 
-# Set default settings for django proyect
+# Set default settings for django project
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_example.settings.settings")
 
 # Initialize django conf
