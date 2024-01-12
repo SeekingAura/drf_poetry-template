@@ -6,13 +6,24 @@ contain the root `toctree` directive.
 --->
 
 # Welcome to project_example's documentation!
+```{toctree}
+:maxdepth: 3
+:hidden:
+:titlesonly:
+
+glossary
+models/index
+```
+
 ```{eval-rst}
 .. autosummary::
-    :toctree: project_example
+    :toctree: _auto/project_example
     :recursive:
 
     project_example
 ```
+
+This link {term}`ToDo` refers a something to glossary
 
 # Indices and tables
 * [Index](#genindex)
