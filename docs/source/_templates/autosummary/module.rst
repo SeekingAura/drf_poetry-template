@@ -1,9 +1,6 @@
-{{ fullname | escape | underline}}
+{{ module + ' ' + name | escape | underline}}
 
 .. automodule:: {{ fullname }}
-   :members:
-   :member-order:
-
    {% block attributes %}
    {% if attributes %}
    .. rubric:: {{ _('Module Attributes') }}
@@ -31,6 +28,8 @@
    .. rubric:: {{ _('Classes') }}
 
    .. autosummary::
+      :toctree:
+      :recursive:
    {% for item in classes %}
       {{ item }}
    {%- endfor %}
