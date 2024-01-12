@@ -15,7 +15,6 @@ contain the root `toctree` directive.
 ```
 
 # Indices and tables
-* {ref}`genindex`
-* {ref}`modindex`
-* {ref}`search`
-
+* [Index](#genindex)
+* [Module Index](#modindex)
+* [Search Page](#search)
