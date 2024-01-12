@@ -6,11 +6,6 @@ contain the root `toctree` directive.
 --->
 
 # Welcome to project_example's documentation!
-```{toctree}
-:maxdepth: 2
-:caption: Contents
-```
-
 ```{eval-rst}
 .. autosummary::
     :toctree: project_example
