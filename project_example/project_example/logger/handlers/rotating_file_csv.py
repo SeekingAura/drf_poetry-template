@@ -33,7 +33,7 @@ class RotatingFileCSV(RotatingFileHandler):
 
         :param filename: File where logger will emit
         :type filename: Path
-        :param mode: mode that the file will opened at emit, append mode is
+        :param mode: mode that the file will opened at emit, append mode is\
         required for log rotating files, defaults to "a"
         :type mode: str, optional
         :param maxBytes: max bytes that the file will have before to rotation\
@@ -53,7 +53,7 @@ class RotatingFileCSV(RotatingFileHandler):
         defaults to tuple()
         :type csv_vars: tuple[str, ...], optional
         :param sep: char separator on csv file, this value is used at join\
-        process of :param:`csv_vars`, this char must be same on all log emits,\
+        process of :paramref:`csv_vars`, this char must be same on all log emits,\
         defaults to ","
         :type sep: str, optional
         """
