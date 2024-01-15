@@ -1,4 +1,4 @@
-{{ module + ' ' + name | escape | underline}}
+{{ (module + ' ' + name) | escape | underline}}
 
 .. automodule:: {{ fullname }}
    {% block attributes %}
