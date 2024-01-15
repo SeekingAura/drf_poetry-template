@@ -1,4 +1,8 @@
 {
+    "[restructuredtext]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 3
+    },
     "[python]": {
         "editor.rulers": [
             {
