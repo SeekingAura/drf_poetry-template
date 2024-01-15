@@ -26,7 +26,6 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 sphinx = "^7.2.6"
-sphinx-paramlinks = "^0.6.0"
 
 [tool.black]
 line-length = 119

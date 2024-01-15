@@ -53,8 +53,8 @@ class RotatingFileCSV(RotatingFileHandler):
         defaults to tuple()
         :type csv_vars: tuple[str, ...], optional
         :param sep: char separator on csv file, this value is used at join\
-        process of :paramref:`csv_vars`, this char must be same on all log emits,\
-        defaults to ","
+        process of **csv_vars** param, this char must be same on all log\
+        emits, defaults to ","
         :type sep: str, optional
         """
         super().__init__(
