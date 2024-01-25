@@ -1,0 +1,74 @@
+version: '3.9'
+name: project_example_server
+
+services:
+  db:
+    image: postgres:16.1-alpine3.18
+    user: "${UID}:${GID}"
+    restart: always
+    env_file:
+      - ./.env-postgres
+    ports:
+      - "${POSTGRES_PUBLISHED_PORTS:-127.0.0.1:5432}:5432"
+    volumes:
+      - type: bind
+        source: ./project_example-init.sql
+        target: /docker-entrypoint-initdb.d/project_example-init.sql
+        bind:
+          propagation: rprivate
+      - type: bind
+        source: ../../postgres
+        target: /var/lib/postgresql/data
+        bind:
+          propagation: rprivate
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 3m
+        max-file: "3"
+  redis:
+    image: redis:7.2.3-alpine3.18
+    user: "${UID}:${GID}"
+    restart: always
+  app_beat:
+    build:
+      context: ../../
+      dockerfile: docker/local/project_example.Dockerfile
+    command: supervisord --configuration /home/app_user/app/supervisor/beat-supervisor.conf
+    image: "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
+    user: "${UID}:${GID}"
+    restart: always
+    stop_signal: SIGTERM 
+    stop_grace_period: 2m10s
+    env_file:
+      - ../../project_example/.env-django
+      - ../../supervisor/.env-supervisor
+    depends_on:
+      - db
+      - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 3m
+        max-file: "3"
+  app_worker:
+    build:
+      context: ../../
+      dockerfile: docker/local/project_example.Dockerfile
+    command: supervisord --configuration /home/app_user/app/supervisor/worker-supervisor.conf
+    image: "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
+    user: "${UID}:${GID}"
+    restart: always
+    stop_signal: SIGTERM 
+    stop_grace_period: 2m10s
+    env_file:
+      - ../../project_example/.env-django
+      - ../../supervisor/.env-supervisor
+    depends_on:
+      - db
+      - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 3m
+        max-file: "3"
