@@ -35,6 +35,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
+    "celery.contrib.sphinx",
 ]
 
 add_module_names = False
@@ -48,6 +49,9 @@ autosummary_generate = True
 
 intersphinx_mapping = {
     "python310": ("https://docs.python.org/3.10", None),
+    "celery536": ("https://docs.celeryq.dev/en/v5.3.6/", None),
+    "django42": ("https://docs.djangoproject.com/en/4.2/", "http://docs.djangoproject.com/en/4.2/_objects/"),
+    "mongoengine": ("https://docs.mongoengine.org/", None),
 }
 
 templates_path = ["_templates"]
