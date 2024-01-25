@@ -1,6 +1,9 @@
 {{ (module + ' ' + name) | escape | underline}}
+
 .. currentmodule:: {{ module }}
+
 .. autoclass:: {{ objname }}
+
    {% block methods %}
    .. automethod:: __init__
 
