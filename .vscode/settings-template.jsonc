@@ -31,19 +31,6 @@
     },
     "isort.check": true,
     // Allow python with virtual env on powershell
-    "terminal.integrated.profiles.windows": {
-        "PowerShell": {
-            "source": "PowerShell",
-            "icon": "terminal-powershell",
-            "args": [
-                "-ExecutionPolicy", "Bypass",
-                "-noexit",
-                "-file",
-                "${workspaceFolder}/.venv/Scripts/activate.ps1"
-            ],
-        }
-    },
-    "terminal.integrated.defaultProfile.windows": "PowerShell",
     // Editor
     "editor.defaultFormatter": null,
     "files.exclude": {
@@ -56,13 +43,15 @@
         "**/locale": true,
     },
     "files.eol": "\r\n",
+    // all .env files will assosiates with dotenv type will have env icon
     "files.associations": {
         "*.env*": "dotenv",
     },
     "editor.scrollbar.vertical": "auto",
     "editor.overviewRulerBorder": true,
     "editor.minimap.enabled": false,
-    "editor.glyphMargin": false, // Debug
+    // Debug breakpoints visibility
+    "editor.glyphMargin": false, 
     "editor.guides.bracketPairs": true,
     "editor.guides.bracketPairsHorizontal": "active",
     "workbench.iconTheme": "material-icon-theme",
@@ -72,6 +61,7 @@
     "workbench.activityBar.iconClickBehavior": "focus",
     "breadcrumbs.filePath": "on",
     "breadcrumbs.symbolSortOrder": "type",
+    // set .env ico for dotenv type case
     "material-icon-theme.languages.associations": {
         "dotenv": "tune",
     },
@@ -119,9 +109,11 @@
     ],
     // WSL case
     "remote.extensionKind": {
+        // Allow to use extensions on host machine from any workspace
         "quicktype.quicktype": [ "ui" ],
-        "ms-azuretools.vscode-docker": [ "workspace" ],
         "mongodb.mongodb-vscode": ["ui"],
+        // Use docker were worskpace is located (allow WSL machine)
+        "ms-azuretools.vscode-docker": [ "workspace" ],
     },
     "remote.autoForwardPorts": false,
     "cSpell.language": "en,es-ES",
