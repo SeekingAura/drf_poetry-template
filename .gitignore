@@ -166,6 +166,10 @@ cython_debug/
 
 # Docker local volumes
 postgres/
+proxy/conf.d/*
+proxy/ssl/*
+docker/**/uwsgi/*
+!docker/**/uwsgi/*-template.ini
 
 # SQL inits
 *init.sql

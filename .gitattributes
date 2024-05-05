@@ -8,6 +8,10 @@
 .gitignore text eol=lf
 .gitattributes text eol=lf
 
+# Py files required specific eol
+supervisor/scripts/kill.py text eol=lf
+docker/prod/init.py text eol=lf
+
 # Prevent Line ending conversion to docker files, that will have according to OS
 Dockerfile -text
 *.Dockerfile -text
