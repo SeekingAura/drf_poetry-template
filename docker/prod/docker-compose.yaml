@@ -33,7 +33,9 @@ services:
   app_beat:
     build:
       context: ../../
-      dockerfile: docker/local/project_example.Dockerfile
+      dockerfile: docker/prod/project_example.Dockerfile
+      cache_from:
+        - "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
     command: supervisord --configuration /home/app_user/app/supervisor/beat-supervisor.conf
     image: "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
     user: "${UID}:${GID}"
@@ -41,8 +43,8 @@ services:
     stop_signal: SIGTERM 
     stop_grace_period: 2m10s
     env_file:
-      - ../../project_example/.env-django
-      - ../../supervisor/.env-supervisor
+      - ./.env-django
+      - ./.env-supervisor
     depends_on:
       - db
       - redis
@@ -54,7 +56,9 @@ services:
   app_worker:
     build:
       context: ../../
-      dockerfile: docker/local/project_example.Dockerfile
+      dockerfile: docker/prod/project_example.Dockerfile
+      cache_from:
+        - "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
     command: supervisord --configuration /home/app_user/app/supervisor/worker-supervisor.conf
     image: "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
     user: "${UID}:${GID}"
@@ -62,11 +66,75 @@ services:
     stop_signal: SIGTERM 
     stop_grace_period: 2m10s
     env_file:
-      - ../../project_example/.env-django
-      - ../../supervisor/.env-supervisor
+      - ./.env-django
+      - ./.env-supervisor
     depends_on:
       - db
       - redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 3m
+        max-file: "3"
+  app_api:
+    build:
+      context: ../../
+      dockerfile: docker/prod/project_example.Dockerfile
+      cache_from:
+        - "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
+    command:  uwsgi --ini /home/app_user/app/project_example/uwsgi.ini --uid 1000 --gid 1000 --enable-threads
+    image: "${DOCKER_REGISTRY}project_example:${PROJECT_EXAMPLE_TAG:-latest}"
+    # user: "${UID}:${GID}"
+    restart: always
+    stop_signal: SIGTERM 
+    stop_grace_period: 2m10s
+    env_file:
+      - ./.env-django
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ../../logs/app_api
+        target: /home/app_user/app/logs
+        bind:
+          propagation: rprivate
+    # Case for override uwsgi.ini
+      - type: bind
+        source: ./uwsgi/uwsgi.ini
+        target: /home/app_user/app/project_example/uwsgi.ini
+        bind:
+          propagation: rprivate
+    logging:
+      driver: "json-file"
+      options:
+        max-size: 3m
+        max-file: "3"
+  proxy:
+    image: nginx:1.25.3-alpine3.18
+    # user: "${UID}:${GID}"
+    restart: always
+    depends_on:
+      - app_api
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
+      - target: 443
+        published: 443
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: ../../proxy/conf.d
+        target: /etc/nginx/conf.d
+        bind:
+          propagation: rprivate
+      - type: bind
+        source: ../../proxy/ssl
+        target: /etc/nginx/ssl
+        bind:
+          propagation: rprivate
     logging:
       driver: "json-file"
       options:

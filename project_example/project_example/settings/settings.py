@@ -18,7 +18,7 @@ import dj_database_url
 
 from ..logger.cmd_formatter import CmdFormatter
 from ..logger.log_levels import LogLevels
-from .dirs import (  # noqa: F401
+from .dirs import (  # noqa: F401; Import dirs make sure exist expected dirs
     BASE_DIR,
     EXPORT_RESULT_DIR,
     LOG_CELERY,
@@ -159,15 +159,36 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # DRF
+    "rest_framework",
+    "drf_spectacular",
+    "corsheaders",
     # Celery
     "django_celery_results",
     "django_celery_beat",
     # Own Project apps
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "project_example",
+    "DESCRIPTION": "",
+    "VERSION": "0.1.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
+
+# django-cors-headers
+CORS_ALLOW_ALL_ORIGINS = ast.literal_eval(os.getenv("CORS_ALLOW_ALL_ORIGINS", "False"))
+CORS_ALLOWED_ORIGINS: list[str] = ast.literal_eval(os.getenv("CORS_ALLOWED_ORIGINS", "[]"))
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -201,8 +222,10 @@ WSGI_APPLICATION = "project_example.wsgi.application"
 
 DATABASES = {
     "default": dj_database_url.config(
-        # Postgresql is a common database, this is an example
-        default=os.getenv("DB_POSTGRESQL_DJANGO", ""),
+        default=os.getenv(
+            "DB_DEFAULT_DJ",
+            f"sqlite:///{Path(BASE_DIR, 'db.sqlite3').absolute().as_posix()}",
+        ),
         conn_max_age=0,
         conn_health_checks=True,
     ),
